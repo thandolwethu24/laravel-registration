@@ -18,6 +18,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/8e534046f2.js" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+            integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
+    </script>
 </head>
 <body>
     <div id="app">
@@ -54,19 +65,30 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{__('Manage Invoices')}}
                                 </a>
 
-                               we <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                               <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                   <a class="dropdown-item dropdown-menu-right">
+                                       {{__('Create Invoice')}}
+                                   </a>
+                                   <a class="dropdown-item dropdown-menu-right">
+                                       {{__('View Invoice')}}
+                                   </a>
+                                   <a class="dropdown-item dropdown-menu-right">
+                                       {{__('Update Invoice')}}
+                                   </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ Auth::user()->name }} ( {{ __('Logout') }} )
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+
                                 </div>
                             </li>
                         @endguest
