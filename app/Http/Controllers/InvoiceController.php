@@ -24,27 +24,32 @@ class InvoiceController extends Controller
 //FROM Orders
 //INNER JOIN Customers
 //ON Orders.CustomerID=Customers.CustomerID;
-        $invoices = DB::select('select invoices.id,description,amount,invoices.created_at, customers.name,username  from invoices
+        $invoices = DB::select('select invoices.id,description,amount,invoices.date_created, customers.name,username  from invoices
                     inner join customers on invoices.customer_id = customers.id');
 
         return view('invoices.index', compact('invoices'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
-    public function create(){
+    public function create(Invoice $invoice){
 
-        return view('invoices.create');
+        return view('invoices.create', compact('invoice'));
     }
 
     public function store(Request $request){
-        $name = $request->input('description');
+        $desc = $request->input('description');
         $amount = $request->input('amount');
-        DB::insert('insert into invoices (description,amount) values(?,?)',[$name,$amount]);
+        $id = $request->input('invoice_id');
+        $cust_id = $request->user()->id;
+
+        DB::insert('insert into invoices (customer_id,description,amount) values(?,?,? )',[$cust_id,$desc,$amount]);
+        DB::insert('insert into invoice_lines (invoice_id,description,amount) values(?,?,?)',[$id,$desc,$amount]);
+
         return redirect()->route('invoices.index')
             ->with('success', 'Customer created successfully');
-
     }
 
     public function show(Invoice $invoice){
+
 
         return view('invoices.show', compact('invoice'));
     }

@@ -8,9 +8,10 @@
                 <div class="col-md-12">
                     <div class="invoice-wrapper">
                         <div class="intro">
-                            Hi <strong> {{ $invoice->description}}</strong>,
+                            Hi <strong> {{ auth()->user()->name}}</strong>,
                             <br>
-                            This is the receipt for a payment of <strong>R 312.00</strong> for your services
+                            {{ $invoice->id }}
+                            This is the receipt for a payment of <strong> R {{ $invoice->amount }}</strong> for your services
                         </div>
 
                         <div class="payment-info">
@@ -21,7 +22,7 @@
                                 </div>
                                 <div class="col-sm-6 text-right">
                                     <span>Payment Date</span>
-                                    <strong>Jul 09, 2014 - 12:20 pm</strong>
+                                    <strong>{{ $invoice->created_at }}</strong>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +59,7 @@
                             <div class="items">
                                 <div class="row item">
                                     <div class="col-xs-4 desc">
-                                        Html theme
+                                        {{ $invoice->description}}
                                     </div>
                                     <div class="col-xs-3 qty">
                                         3
@@ -93,8 +94,8 @@
                             <div class="total text-right">
                                 <p class="extra-notes">
                                     <strong>Extra Notes</strong>
-                                    Please send all items at the same time to shipping address by next week.
-                                    Thanks a lot.
+                                    Please send use your account number as reference
+                                    When making payment
                                 </p>
                                 <div class="field">
                                     Subtotal <span>$379.00</span>

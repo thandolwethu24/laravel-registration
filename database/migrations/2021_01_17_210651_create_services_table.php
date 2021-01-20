@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInvoiceLinesTable extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateInvoiceLinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invoice_lines', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->string('service_id');
+            $table->string('service_name');
+            $table->integer('unit_price');
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateInvoiceLinesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_lines');
+        Schema::dropIfExists('services');
     }
 }
